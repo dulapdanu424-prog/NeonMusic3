@@ -1,0 +1,236 @@
+/* Кнопки сортировки, фильтра, случайного трека, темы */
+.top-widget {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.top-widget button, .top-widget select, .theme-switch {
+  margin: 0 5px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: none;
+  background: #222;
+  color: #00ffe7;
+  cursor: pointer;
+  font-weight: bold;
+}
+.top-widget button:hover, .top-widget select:hover {
+  background: #00ffe7;
+  color: #222;
+}
+.theme-switch {
+  display: inline-block;
+}
+
+/* Лайки */
+.like-btn {
+  background: none;
+  border: none;
+  color: #ff00ff;
+  font-size: 1.3em;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: color 0.2s;
+}
+.like-btn.liked {
+  color: #00ffe7;
+}
+
+/* Кнопка скачивания */
+.download-btn {
+  margin-left: 8px;
+  color: #00ffe7;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+.download-btn:hover {
+  color: #ff00ff;
+}
+
+/* Уведомления */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #222;
+  color: #00ffe7;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00ffe7;
+  display: none;
+  z-index: 1000;
+}
+
+/* Светлая тема */
+body.light-theme {
+  background: #f5f5f5;
+  color: #222;
+}
+body.light-theme {
+  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+  color: #222;
+}
+body.light-theme .track {
+  background: rgba(255,255,255,0.7);
+  color: #222;
+  box-shadow: 0 0 20px #8ec5fc;
+}
+body.light-theme .like-btn {
+  color: #a259ff;
+}
+body.light-theme .download-btn {
+  color: #43e97b;
+}
+body.light-theme .notification {
+  background: #8ec5fc;
+  color: #222;
+  box-shadow: 0 0 10px #a259ff;
+}
+body.light-theme .comments p {
+  background: #e0c3fc;
+  color: #222;
+}
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #00ffe7;
+  margin-bottom: 5px;
+}
+.comments p {
+  background: #222;
+  color: #00ffe7;
+  padding: 4px 8px;
+  border-radius: 5px;
+  margin: 2px 0;
+}
+body.light-theme .comments p {
+  background: #eee;
+  color: #222;
+}
+
+/* Топ недели, история, соцсети */
+#top-week, #history {
+  background: #222;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 20px auto;
+  max-width: 400px;
+}
+#top-week h3, #history h3 {
+  color: #ff00ff;
+}
+#topWeekList li, #historyList li {
+  color: #fff;
+  margin-bottom: 4px;
+}
+#social {
+  text-align: center;
+  margin-bottom: 20px;
+}
+#social a {
+  color: #00ffe7;
+  margin: 0 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+#social a:hover {
+  color: #ff00ff;
+}
+/* Фон и общий стиль */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at top, #0d0d0d, #000);
+  color: #fff;
+  text-align: center;
+}
+
+/* Заголовок */
+h1 {
+  font-size: 2.5rem;
+  margin: 20px 0;
+  color: #ff00ff;
+  text-shadow: 0 0 15px #ff00ff, 0 0 30px #00ffff;
+  animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+  }
+  to {
+    text-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff;
+  }
+}
+
+/* Сетка */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Каждая колонка */
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Трек */
+.track {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid transparent;
+  border-radius: 15px;
+  padding: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
+}
+
+.track:hover {
+  border-color: #ff00ff;
+  box-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff;
+  transform: translateY(-5px);
+}
+
+/* Названия песен */
+.track h2 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #00ffff;
+  text-shadow: 0 0 5px #00ffff, 0 0 10px #ff00ff;
+}
+
+/* Аудио-плеер */
+audio {
+  width: 100%;
+  filter: drop-shadow(0 0 5px #ff00ff);
+}
+
+/* 📱 Адаптив */
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Оформление из index.html */
+.header { text-align: center; margin-top: 30px; }
+.description { text-align: center; margin-bottom: 20px; color: #b3b3b3; }
+nav { text-align: center; margin-bottom: 20px; }
+nav a { color: #00ffe7; margin: 0 10px; text-decoration: none; font-weight: bold; }
+.search-box { text-align: center; margin-bottom: 30px; }
+.playlist { background: #222; border-radius: 10px; padding: 15px; margin: 20px auto; max-width: 400px; }
+.playlist h3 { color: #00ffe7; }
+.footer { text-align: center; margin-top: 40px; color: #888; font-size: 0.9em; }
