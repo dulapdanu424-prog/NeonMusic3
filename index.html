@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>My Neon Music</title>
+  <link rel="stylesheet" href="body.css">
+  <!-- Все стили теперь в body.css -->
+</head>
+<body>
+  <div class="upload-section" style="margin:30px 0; text-align:center;">
+    <h2>Добавить свой трек</h2>
+    <form id="uploadForm">
+      <input type="text" id="trackTitle" placeholder="Название трека" required style="padding:8px; border-radius:5px; border:1px solid #00ffe7;">
+      <input type="file" id="trackFile" accept="audio/mp3,audio/mpeg" required style="padding:8px;">
+      <button type="submit" style="padding:8px 16px; background:#00ffe7; color:#222; border:none; border-radius:5px; cursor:pointer;">Загрузить</button>
+    </form>
+    <div id="uploadMsg" style="color:#00ffe7; margin-top:10px;"></div>
+  </div>
+  <div class="top-widget">
+    <button onclick="sortTracks('asc')">Сортировать A-Я</button>
+    <button onclick="sortTracks('desc')">Сортировать Я-A</button>
+    <select id="genreFilter" onchange="filterGenre()">
+      <option value="">Все жанры</option>
+      <option value="rap">Rap</option>
+      <option value="pop">Pop</option>
+      <option value="other">Другое</option>
+    </select>
+    <button onclick="randomTrack()">🎲 Случайный трек</button>
+    <label class="theme-switch"><input type="checkbox" id="themeToggle" onchange="toggleTheme()"> Тёмная тема</label>
+  </div>
+  <div id="top-week" class="playlist">
+    <h3>Топ недели</h3>
+    <ul id="topWeekList" style="list-style:none;padding:0;margin:0;color:#fff;"></ul>
+  </div>
+  <div class="header">
+    <h1>🎵 My Neon Music 🎵</h1>
+  </div>
+  <div class="description">
+    Добро пожаловать на музыкальный сайт! Здесь вы найдёте любимые треки и сможете слушать их онлайн.
+  </div>
+  <nav>
+    <a href="#">Главная</a>
+    <a href="#playlist">Плейлист</a>
+    <a href="#about">О сайте</a>
+  </nav>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Поиск по трекам..." oninput="searchTracks()" style="padding:8px;width:220px;border-radius:5px;border:none;">
+  </div>
+  <div id="playlist" class="playlist">
+    <h3>Плейлист</h3>
+    <ul id="playlistList" style="list-style:none;padding:0;margin:0;color:#fff;"></ul>
+    <button onclick="playPlaylist()" style="margin-top:10px;padding:8px 16px;background:#00ffe7;color:#222;border:none;border-radius:5px;cursor:pointer;">▶️ Воспроизвести всё</button>
+  </div>
+
+  <div class="grid" id="tracksGrid">
+    <!-- Колонка 1 -->
+    <div class="column">
+  <div class="track" data-genre="rap"><h2>Icegergert_78_flow</h2><audio controls><source src="Icegergert_78_flow.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Icegergert_78_flow.mp3" download title="Скачать трек">⬇️</a><div class="comments"></div></div>
+  <div class="track" data-genre="rap"><h2>ICEGERGERT_Syn_ot_che_rnyh_korolev</h2><audio controls><source src="ICEGERGERT_Syn_ot_che_rnyh_korolev.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="ICEGERGERT_Syn_ot_che_rnyh_korolev.mp3" download title="Скачать трек">⬇️</a><div class="comments"></div></div>
+  <div class="track" data-genre="other"><h2>Беспредел.ru</h2><audio controls><source src="Беспредел.ru.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Беспредел.ru.mp3" download title="Скачать трек">⬇️</a><div class="comments"></div></div>
+  <div class="track" data-genre="pop"><h2>Я её фанат</h2><audio controls><source src="яеефанат.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="яеефанат.mp3" download title="Скачать трек">⬇️</a><div class="comments"></div></div>
+  <div class="track" data-genre="other"><h2>bula-by-svnv-tleet</h2><audio controls><source src="bula-by-svnv-tleet.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="bula-by-svnv-tleet.mp3" download title="Скачать трек">⬇️</a><div class="comments"></div></div>
+  <div class="track" data-genre="pop"><h2>Doll Carranza Va Pa Dentro</h2><audio controls><source src="Doll Carranza Va Pa Dentro.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Doll Carranza Va Pa Dentro.mp3" download title="Скачать трек">⬇️</a><div class="comments"></div></div>
+  <div class="track" data-genre="rap"><h2>Eminem - Lose Yourself</h2><audio controls><source src="Eminem - Lose Yourself.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Eminem - Lose Yourself.mp3" download title="Скачать трек">⬇️</a><div class="comments"></div></div>
+  <div class="track" data-genre="rap"><h2>Eminem ft Juice Wrld - Godzilla</h2><audio controls><source src="Eminem_ft_Juice_Wrld_-_Godzilla.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Eminem_ft_Juice_Wrld_-_Godzilla.mp3" download title="Скачать трек">⬇️</a><div class="comments"></div></div>
+  <div class="track" data-genre="other"><h2>F0lk_Shosse</h2><audio controls><source src="F0lk_Shosse.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="F0lk_Shosse.mp3" download title="Скачать трек">⬇️</a><div class="comments"></div></div>
+  <div class="track" data-genre="rap"><h2>Last Night ICEGERGERT</h2><audio controls><source src="ton_titre.mp3.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="ton_titre.mp3.mp3" download title="Скачать трек">⬇️</a><div class="comments"></div></div>
+  <div id="notification" class="notification"></div>
+  <div id="history" class="playlist">
+    <h3>История прослушиваний</h3>
+    <ul id="historyList" style="list-style:none;padding:0;margin:0;color:#fff;"></ul>
+  </div>
+  <div id="social" class="description" style="margin-top:20px;">
+    <h3>Соцсети исполнителей</h3>
+    <a href="https://vk.com/" target="_blank">VK</a> |
+    <a href="https://instagram.com/" target="_blank">Instagram</a> |
+    <a href="https://youtube.com/" target="_blank">YouTube</a>
+  </div>
+    </div>
+
+    <!-- Колонка 2 -->
+    <div class="column">
+  <div class="track"><h2>Скриптонит — Положение</h2><audio controls><source src="Положение.mp3.mp4" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Положение.mp3.mp4" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>ICEGERGERT — Plug</h2><audio controls><source src="plug.mp3.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="plug.mp3.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>ICEGERGERT — Международный Андеграунд</h2><audio controls><source src="last.mp3.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="last.mp3.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>gamora-ad</h2><audio controls><source src="gamora-ad.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="gamora-ad.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>icegergert-gektor</h2><audio controls><source src="icegergert-gektor.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="icegergert-gektor.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>Manele</h2><audio controls><source src="Manele.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Manele.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>MORGENSHTERN - Последняя любовь</h2><audio controls><source src="MORGENSHTERN-Последняя_любовь.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="MORGENSHTERN-Последняя_любовь.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>Nurminskij - Dzhip</h2><audio controls><source src="Nurminskij_Dzhip.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Nurminskij_Dzhip.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>Ламбада</h2><audio controls><source src="Ламбада.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Ламбада.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>ICEGERGERT - АРИТМИЯ</h2><audio controls><source src="ICEGERGERT - АРИТМИЯ.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="ICEGERGERT - АРИТМИЯ.mp3" download title="Скачать трек">⬇️</a></div>
+    </div>
+
+    <!-- Колонка 3 -->
+    <div class="column">
+  <div class="track"><h2>Hai tu Maria</h2><audio controls><source src="Hai_tu_Maria.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Hai_tu_Maria.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>Последний танец</h2><audio controls><source src="Tini.mp4" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)">❤</button><a class="download-btn" href="Tini.mp4" download>⬇️</a></div>
+  <div class="track"><h2>S9 La Street</h2><audio controls><source src="S9 La Street.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)">❤</button><a class="download-btn" href="S9 La Street.mp3" download>⬇️</a></div>
+  <div class="track"><h2>Santiz - Моей Семье</h2><audio controls><source src="Santiz_-_Моей_Семье.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)">❤</button><a class="download-btn" href="Santiz_-_Моей_Семье.mp3" download>⬇️</a></div>
+  <div class="track"><h2>Skriptonit - Rysba</h2><audio controls><source src="Skriptonit_Rysba.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)">❤</button><a class="download-btn" href="Skriptonit_Rysba.mp3" download>⬇️</a></div>
+  <div class="track"><h2>Stefaan Junior - Cheia Franceza</h2><audio controls><source src="Stefaan Junior - Cheia Franceza.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)">❤</button><a class="download-btn" href="Stefaan Junior - Cheia Franceza.mp3" download>⬇️</a></div>
+  <div class="track"><h2>TSM</h2><audio controls><source src="TSM.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)">❤</button><a class="download-btn" href="TSM.mp3" download>⬇️</a></div>
+  <div class="track"><h2>unnv_pisma</h2><audio controls><source src="unnv_pisma.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)">❤</button><a class="download-btn" href="unnv_pisma.mp3" download>⬇️</a></div>
+  <div class="track"><h2>Vektor A - Naposledok</h2><audio controls><source src="Vektor_A_-_Naposledok.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)">❤</button><a class="download-btn" href="Vektor_A_-_Naposledok.mp3" download>⬇️</a></div>
+  <div class="track"><h2>Vektor A - Snova</h2><audio controls><source src="Vektor_A_Snova.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)">❤</button><a class="download-btn" href="Vektor_A_Snova.mp3" download>⬇️</a></div>
+    </div>
+
+    <!-- Колонка 4 -->
+    <div class="column">
+  <div class="track"><h2>Vektor A - Ya v poryadke</h2><audio controls><source src="Vektor_A_Ya_v_poryadke.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Vektor_A_Ya_v_poryadke.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>Vektor A - Lirika</h2><audio controls><source src="vektor-a-lirika.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="vektor-a-lirika.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>VEN1 & Ramos - Vanilla</h2><audio controls><source src="VEN1 & Ramos. - Vanilla.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="VEN1 & Ramos. - Vanilla.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>Xcho - Мир На Двоих</h2><audio controls><source src="Xcho - Мир На Двоих.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Xcho - Мир На Двоих.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>Xcho - Где же вы</h2><audio controls><source src="xcho-gde-zhe-vy.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="xcho-gde-zhe-vy.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>Xcho - Про любовь</h2><audio controls><source src="xcho-pro-lyubov.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="xcho-pro-lyubov.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>Вектор А - Не вернусь</h2><audio controls><source src="Вектор А - Не вернусь.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Вектор А - Не вернусь.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>Гио Пика - Где ты</h2><audio controls><source src="Гио Пика - Где ты.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Гио Пика - Где ты.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>Скриптонит & Райда - Baby Mama</h2><audio controls><source src="Скриптонит & Райда - Baby Mama.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Скриптонит & Райда - Baby Mama.mp3" download title="Скачать трек">⬇️</a></div>
+  <div class="track"><h2>Фогель & Вектор А - Пока</h2><audio controls><source src="Фогель Вектор А - Пока.mp3" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="Фогель Вектор А - Пока.mp3" download title="Скачать трек">⬇️</a></div>
+    </div>
+  </div>
+  <div id="about" class="description" style="margin-top:40px;">
+    <h2>О сайте</h2>
+    <p>Сайт создан для любителей музыки. Здесь собраны треки разных жанров и исполнителей. Автор: <b>Ваше имя</b>.</p>
+    <p>Связаться: <a href="mailto:your@email.com" style="color:#00ffe7;">your@email.com</a></p>
+  </div>
+  <div class="footer">
+    &copy; 2025 My Neon Music. Все права защищены.
+  </div>
+  <script>
+    // Загрузка своего трека (локально)
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const title = document.getElementById('trackTitle').value.trim();
+      const fileInput = document.getElementById('trackFile');
+      const file = fileInput.files[0];
+      if (!title || !file) return;
+      const url = URL.createObjectURL(file);
+      // Добавляем трек в первую колонку
+      const col = document.querySelector('.grid .column');
+      const div = document.createElement('div');
+      div.className = 'track';
+      div.innerHTML = `<h2>${title}</h2><audio controls><source src="${url}" type="audio/mpeg"></audio><button class="like-btn" onclick="likeTrack(this)" title="Поставить лайк"><span class="like-icon">❤</span> <span class="like-count">0</span></button><a class="download-btn" href="${url}" download title="Скачать трек">⬇️</a><div class="comments"></div>`;
+      col.appendChild(div);
+      document.getElementById('uploadMsg').textContent = 'Трек добавлен!';
+      setTimeout(()=>{document.getElementById('uploadMsg').textContent='';},2000);
+      fileInput.value = '';
+      document.getElementById('trackTitle').value = '';
+    });
+    // Сортировка треков
+    function sortTracks(order) {
+      const grid = document.getElementById('tracksGrid');
+      const columns = grid.querySelectorAll('.column');
+      columns.forEach(col => {
+        const tracks = Array.from(col.querySelectorAll('.track'));
+        tracks.sort((a, b) => {
+          const ta = a.querySelector('h2').textContent;
+          const tb = b.querySelector('h2').textContent;
+          return order === 'asc' ? ta.localeCompare(tb) : tb.localeCompare(ta);
+        });
+        tracks.forEach(track => col.appendChild(track));
+      });
+    }
+
+    // Фильтр по жанру
+    function filterGenre() {
+      const genre = document.getElementById('genreFilter').value;
+      document.querySelectorAll('.track').forEach(track => {
+        if (!genre || track.dataset.genre === genre) {
+          track.style.display = '';
+        } else {
+          track.style.display = 'none';
+        }
+      });
+    }
+
+    // Лайки
+    function likeTrack(btn) {
+      btn.classList.toggle('liked');
+      showNotification('Трек ' + btn.parentElement.querySelector('h2').textContent + ' понравился!');
+    }
+
+    // Случайный трек
+    function randomTrack() {
+      const tracks = document.querySelectorAll('.track');
+      const arr = Array.from(tracks).filter(t => t.style.display !== 'none');
+      if (arr.length) {
+        const idx = Math.floor(Math.random() * arr.length);
+        arr[idx].querySelector('audio').play();
+        showNotification('Случайный трек: ' + arr[idx].querySelector('h2').textContent);
+      }
+    }
+
+    // Переключатель темы
+    function toggleTheme() {
+      document.body.classList.toggle('light-theme');
+    }
+
+    // Уведомления
+    function showNotification(msg) {
+      const n = document.getElementById('notification');
+      n.textContent = msg;
+      n.style.display = 'block';
+      setTimeout(() => { n.style.display = 'none'; }, 2000);
+    }
+
+    // История прослушиваний
+    const history = [];
+    document.querySelectorAll('.track audio').forEach(audio => {
+      audio.addEventListener('play', function() {
+        const title = this.parentElement.querySelector('h2').textContent;
+        if (!history.includes(title)) {
+          history.push(title);
+          updateHistory();
+        }
+      });
+    });
+    function updateHistory() {
+      const list = document.getElementById('historyList');
+      list.innerHTML = '';
+      history.forEach(track => {
+        const li = document.createElement('li');
+        li.textContent = track;
+        list.appendChild(li);
+      });
+    }
+
+    // Топ недели (заглушка)
+    function updateTopWeek() {
+      const list = document.getElementById('topWeekList');
+      list.innerHTML = '';
+      ['Eminem - Lose Yourself', 'ICEGERGERT_Syn_ot_che_rnyh_korolev', 'Я её фанат'].forEach(track => {
+        const li = document.createElement('li');
+        li.textContent = track;
+        list.appendChild(li);
+      });
+    }
+    updateTopWeek();
+
+    // Комментарии (заглушка)
+    document.querySelectorAll('.track').forEach(track => {
+      const commentsDiv = track.querySelector('.comments');
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Комментарий...';
+      input.style.marginTop = '8px';
+      input.onkeydown = function(e) {
+        if (e.key === 'Enter' && input.value) {
+          const p = document.createElement('p');
+          p.textContent = input.value;
+          commentsDiv.appendChild(p);
+          input.value = '';
+        }
+      };
+      commentsDiv.appendChild(input);
+    });
+    // Поиск по трекам
+    function searchTracks() 
+    {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const grid = document.getElementById('tracksGrid');
+      const tracks = grid.querySelectorAll('.track');
+      tracks.forEach(track => {
+        const text = track.textContent.toLowerCase();
+        track.style.display = text.includes(input) ? '' : 'none';
+      });
+    }
+
+    // Плейлист
+    const playlist = [];
+    // Отключение других треков при запуске нового
+    const allAudios = Array.from(document.querySelectorAll('.track audio'));
+    // Здесь будет новая рабочая реализация на JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.track audio').forEach(audio => {
+    audio.addEventListener('play', function() {
+      document.querySelectorAll('.track audio').forEach(a => {
+        if (a !== this) {
+          a.pause();
+          a.currentTime = 0;
+        }
+      });
+    });
+  });
+});
+
+    function updatePlaylist() 
+    {
+      const list = document.getElementById('playlistList');
+      list.innerHTML = '';
+      playlist.forEach(track => 
+      {
+        const li = document.createElement('li');
+        li.textContent = track;
+        list.appendChild(li);
+      });
+    }
+
+    function playPlaylist() 
+    {
+      const grid = document.getElementById('tracksGrid');
+      const audios = grid.querySelectorAll('.track audio');
+      let i = 0;
+      function playNext() 
+      {
+        if (i < audios.length) 
+        {
+          audios[i].play();
+          audios[i].onended = () => 
+          {
+            i++;
+            playNext();
+          };
+        }
+      }
+      playNext();
+    }
+  </script>
+</script>
+<script src="main.js"></script>
+</body>
+</html>
